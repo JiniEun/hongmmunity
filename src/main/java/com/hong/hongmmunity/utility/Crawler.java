@@ -83,9 +83,9 @@ public class Crawler {
 		}
 
 	}
-	public static List<String> AirPollutionCrawling(String loc) throws IOException {
-		String url = "https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&qvt=0&query=%EC%A0%84%EA%B5%AD%EC%B4%88%EB%AF%B8%EC%84%B8%EB%A8%BC%EC%A7%80";
-
-
-	}
+//	public static List<String> AirPollutionCrawling(String loc) throws IOException {
+//		String url = "https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&qvt=0&query=%EC%A0%84%EA%B5%AD%EC%B4%88%EB%AF%B8%EC%84%B8%EB%A8%BC%EC%A7%80";
+//
+//
+//	}
 }
