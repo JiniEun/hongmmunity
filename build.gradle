@@ -32,7 +32,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation group: 'org.apache.tiles', name: 'tiles-jsp', version: '3.0.8'
-	implementation group: 'org.json', name: 'json', version: '20201115'
+	implementation group: 'org.json', name: 'json', version: '20220320'
 	implementation 'org.jsoup:jsoup:1.14.3'
 }
 

@@ -1,51 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
+<c:set var="root" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="/resources/static/css/user_loginForm.css">
+    <link rel="stylesheet" href="/resources/css/user_loginForm.css">
 </head>
 <body>
-<div class="container-sm">
-    <div class="input-form-backgroud row">
-        <div class="input-form col-md-12 mx-auto">
-            <h2 class="col mb-4 txt-center">로그인</h2>
-            <form class="form-horizontal" action="login" method="post">
-                <div class="l-flex p-80 mb-3">
-                    <div class="col pl-0 pr-0">
-                        <div class="form-group col-sm l-flex itm-center pl-0">
-                            <label for="ID">아이디</label> <input type="text"
-                                                               class="form-control w-70" id="ID" placeholder="Enter id"
-                                                               name="ID" required="required" value=''>
+<div class="container-md">
+    <section class="vh-100 gradient-custom">
+        <form action="${root}/user/login" method="post">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                        <div class="card bg-secondary text-white" style="border-radius: 1rem;">
+                            <div class="card-body p-5 text-center">
+
+                                <div class="mb-md-5 mt-md-4 pb-5">
+
+                                    <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                                    <p class="text-white-50 mb-5">이메일과 비밀번호를 입력하세요!</p>
+
+                                    <div class="form-outline form-white mb-4">
+                                        <label class="form-label" for="userEmail">Email</label>
+                                        <input type="email" id="userEmail" name="userEmail" class="form-control form-control-lg" placeholder="example@naver.com" required="required" value=''/>
+                                    </div>
+
+                                    <div class="form-outline form-white mb-4">
+                                        <label class="form-label" for="userPassword">Password</label>
+                                        <input type="password" id="userPassword" class="form-control form-control-lg" placeholder="Enter password" name="userPassword"/>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label> <input type="checkbox" name="c_id" value="Y"
+                                                       checked="checked"> Remember ID
+                                        </label>
+                                    </div>
+                                    <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot
+                                        password?</a>
+                                    </p>
+
+                                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+
+                                    <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                                        <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                                        <a href="#!" class="text-white"><i
+                                                class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                                        <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                                    </div>
+
+                                </div>
+
+                                <div>
+                                    <p class="mb-0">Don't have an account? <a href="/signup" class="text-white-50 fw-bold">Sign
+                                        Up</a>
+                                    </p>
+                                </div>
+
+
+                            </div>
                         </div>
-                        <div class="form-group col-sm l-flex itm-center pl-0 mb-0">
-                            <label for="password">비밀번호</label> <input type="password"
-                                                                      class="form-control w-70" id="password"
-                                                                      placeholder="Enter password" name="password"
-                                                                      required="required">
-                        </div>
-                    </div>
-                    <div class="col-sm-3 pl-0 pr-0">
-                        <button type="submit" class="btn btn-color login-btn"
-                                onclick="location.href='../'">로그인</button>
                     </div>
                 </div>
-                <div class="form-group col-sm l-flex p-80">
-                    <div class="checkbox">
-                        <label> <input type="checkbox" name="c_id" value="Y"
-                                       checked="checked"> Remember ID
-                        </label>
-                    </div>
-                    <div>
-                        <a class="a-color mr-2" href='create'>회원가입</a>
-                        <a class="a-color" href='userfind'>아이디/비밀번호 찾기</a>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+            </div>
+        </form>
+    </section>
 </div>
 </body>
 </html>

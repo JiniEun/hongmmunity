@@ -21,6 +21,8 @@ public class UserResponseDto {
 
     private final String userPhoneNumber;
 
+    private final String userGrade;
+
     public UserResponseDto(User user) {
         this.userId = user.getUserId();
         this.userEmail = user.getUserEmail();
@@ -29,5 +31,6 @@ public class UserResponseDto {
         this.userGender = user.getUserGender();
         this.userStudentId = user.getUserStudentId();
         this.userPhoneNumber = user.getUserPhoneNumber();
+        this.userGrade = user.getUserGrade();
     }
 }

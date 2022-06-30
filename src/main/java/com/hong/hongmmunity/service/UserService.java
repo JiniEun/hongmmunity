@@ -1,8 +1,6 @@
 package com.hong.hongmmunity.service;
 
-import com.hong.hongmmunity.dto.UserResponseDto;
-import com.hong.hongmmunity.dto.UserSignupRequestDto;
-import com.hong.hongmmunity.dto.UserUpdateRequestDto;
+import com.hong.hongmmunity.dto.*;
 import com.hong.hongmmunity.entity.User;
 import com.hong.hongmmunity.exception.BaseException;
 import com.hong.hongmmunity.exception.BaseResponseCode;
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -22,6 +21,32 @@ public class UserService {
 
     public boolean existsByUserEmail(String email) {
         return userRepository.existsByUserEmail(email).orElseThrow(() -> new BaseException(BaseResponseCode.BAD_REQUEST));
+    }
+
+    public boolean loginCheck(Map<String, String> map) {
+        UserLoginRequestDto userLoginRequestDto = getUserLoginRequestDtoByMap(map);
+
+        boolean userCheck = false;
+        if (!existsByUserEmail(userLoginRequestDto.getUserEmail())) {
+            return userCheck;
+        }
+        userCheck = findUserByEmail(userLoginRequestDto.getUserEmail()).getUserPassword().equals(userLoginRequestDto.getUserPassword());
+
+        return userCheck;
+    }
+
+    private UserLoginRequestDto getUserLoginRequestDtoByMap(Map<String, String> map) {
+        String userEmail = map.get("userEmail");
+        String userPassword = map.get("userPassword");
+
+        return new UserLoginRequestDto(userEmail, userPassword);
+    }
+
+    public String getUserGrade(Map<String, String> map){
+        String userEmail = map.get("userEmail");
+        UserGradeResponseDto userGradeResponseDto = new UserGradeResponseDto(findUserByEmail(userEmail).getUserGrade());
+
+        return userGradeResponseDto.getUserGrade();
     }
 
     @Transactional(readOnly = true)
@@ -37,6 +62,11 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
+    public UserResponseDto findUserByMap(Map<String, String> map) {
+        return findUserByEmail(map.get("userEmail"));
+    }
+
+    @Transactional(readOnly = true)
     public List<UserResponseDto> findAllUser() {
         return userRepository.findAll()
                 .stream()
@@ -44,7 +74,14 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public Long create(UserSignupRequestDto userSignupRequestDto) {
+    public Long signUp(Map<String, String> map){
+//        map.get("userEmail")
+
+        return 1L;
+
+    }
+
+    private Long create(UserSignupRequestDto userSignupRequestDto) {
 
         boolean exitsCheck = userRepository.existsByUserEmail(userSignupRequestDto.getUserEmail()).orElseThrow(() -> new BaseException(BaseResponseCode.BAD_REQUEST));
 
@@ -63,12 +100,12 @@ public class UserService {
 
     public Optional<User> update(UserUpdateRequestDto userUpdateRequestDto) throws BaseException {
         Optional<User> user = userRepository.findById(userUpdateRequestDto.getUserId());
-        try{
+        try {
             user.ifPresent(selectUser -> {
                 selectUser.setUserPhoneNumber(userUpdateRequestDto.getUserPhoneNumber());
                 userRepository.save(selectUser);
             });
-        } catch(Exception e){
+        } catch (Exception e) {
             throw new BaseException(BaseResponseCode.METHOD_NOT_ALLOWED);
         }
         return user;

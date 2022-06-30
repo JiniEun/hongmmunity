@@ -1,5 +1,6 @@
 package com.hong.hongmmunity.entity;
 
+import com.hong.hongmmunity.utility.UserGrade;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,11 @@ public class User extends BaseTimeEntity {
 
     @Column
     private String userPhoneNumber;
+
+    @Column(nullable = false)
+    private String userGrade;
+    // default UserGrade.MEMBER
+    // admin -> UserGrade.ADMIN
 
     @Builder
     public User(Long userId, String userEmail, String userPassword, String userName, String userGender, String userStudentId, String userPhoneNumber) {

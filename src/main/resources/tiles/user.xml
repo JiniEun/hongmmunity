@@ -13,18 +13,23 @@
                        value="/WEB-INF/views/template/bottom.jsp" />
     </definition>
     <definition name="/" extends="main">
-        <put-attribute name="title" value="기본페이지"></put-attribute>
+        <put-attribute name="title" value="HwaHongMmunity"/>
         <put-attribute name="body"
                        value="/WEB-INF/views/index.jsp" />
     </definition>
     <definition name="/user/login" extends="main">
-        <put-attribute name="title" value="로그인"></put-attribute>
+        <put-attribute name="title" value="로그인"/>
         <put-attribute name="body"
                        value="/WEB-INF/views/user/loginForm.jsp" />
     </definition>
     <definition name="/user/create" extends="main">
-        <put-attribute name="title" value="회원가입"></put-attribute>
+        <put-attribute name="title" value="회원가입"/>
         <put-attribute name="body"
                        value="/WEB-INF/views/user/createForm.jsp" />
+    </definition>
+    <definition name="/user/errorMsg" extends="main">
+        <put-attribute name="title" value="로그인 오류"/>
+        <put-attribute name="body"
+                       value="/WEB-INF/views/user/errorMsg.jsp" />
     </definition>
 </tiles-definitions>

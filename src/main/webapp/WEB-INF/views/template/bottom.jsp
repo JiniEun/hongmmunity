@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
-    <link rel="stylesheet" href="/resources/static/css/bottom.css">
+<%--    <link rel="stylesheet" href="/webapp/resources/css/bottom.css">--%>
 </head>
 <body>
 <footer class="container-fluid navbar-fixed-bottom body-bottom-color"

@@ -3,15 +3,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hongmmunity</title>
+    <title>HwaHongMmunity</title>
     <meta charset="utf-8">
-    <script>
-
-    </script>
 </head>
 <body>
 
 <div>Hello, Spring Boot App</div>
+
+
+<div>  <a href="https://hwahong.hs.kr/">
+    <img class="img-hwahong" src="/resources/images/hwahong_title.png"/>
+</a></div>
 <div class="row l-covid" style="margin: 10px;">
     <div class="d-flex">
         <div class="h4 mb-0 mr-2">COVID-19</div>
