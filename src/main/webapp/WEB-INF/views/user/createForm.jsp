@@ -11,7 +11,7 @@
 <body>
 <div class="container-md">
     <section class="vh-80 gradient-custom">
-        <form action="${root}/user/signup" method="post">
+        <form action="${root}/user/signup" method="post" name="signupfrm" id="signupfrm">
             <div class="container py-3 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100 card-width">
                     <div class="col-1 col-md-8 col-lg-6 col-xl-5">
@@ -33,33 +33,33 @@
                                     <div class="form-outline form-white mb-4">
                                         <label class="form-label" for="userPassword">Password</label>
                                         <input type="password" id="userPassword" class="form-control form-control-lg"
-                                               placeholder="Enter password" name="userPassword"/>
+                                               placeholder="Enter password" name="userPassword" required="required"/>
                                     </div>
 
                                     <div class="form-outline form-white mb-4">
                                         <label class="form-label" for="userName">이름</label>
                                         <input type="text" id="userName" class="form-control form-control-lg"
-                                               placeholder="이름 입력" name="userName"/>
+                                               placeholder="이름 입력" name="userName" required="required"/>
                                     </div>
 
                                     <div class="form-outline form-white mb-4">
                                         <label class="form-label" for="userStudentId">학번</label>
                                         <input type="text" id="userStudentId" class="form-control form-control-lg"
-                                               placeholder="학번 입력" name="userStudentId"/>
+                                               placeholder="학번 입력" name="userStudentId" required="required"/>
                                     </div>
 
                                     <div class="form-outline form-white mb-4">
                                         <div class="form-label">성별 선택</div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="userGender"
-                                                   id="userGender1">
+                                                   id="userGender1" value="여자">
                                             <label class="form-check-label" for="userGender1">
                                                 여자
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="userGender"
-                                                   id="userGender2">
+                                                   id="userGender2" value="남자">
                                             <label class="form-check-label" for="userGender2">
                                                 남자
                                             </label>
@@ -67,8 +67,8 @@
                                         </div>
                                     </div>
 
-
-                                    <button class="btn btn-outline-light btn-lg px-5" type="submit">SignUp</button>
+                                    <button class="btn btn-outline-light btn-lg px-5" id="signup" type="button">SignUp
+                                    </button>
 
                                     <div class="d-flex justify-content-center text-center mt-4 pt-1">
                                         <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
@@ -85,5 +85,19 @@
         </form>
     </section>
 </div>
+
+<script type="text/javascript">
+
+    $("#signup").on("click", function () {
+        if (!$("#userGender1").is(":checked") && !$("#userGender2").is(":checked")) {
+            alert("성별을 선택해주세요.");
+            $("#userGender1").focus();
+            return;
+        }
+
+        document.getElementById('signupfrm').submit();
+    });
+
+</script>
 </body>
 </html>

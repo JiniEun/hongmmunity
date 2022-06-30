@@ -105,14 +105,19 @@ public class UserController {
 
     @GetMapping("/signup")
     public String create(HttpServletRequest request) {
+        log.info("GET : create");
+
         return "/user/create";
     }
 
     @PostMapping("/signup")
     public String create(@RequestParam Map<String, String> map, HttpServletRequest request) {
 
+        log.info("POST : create");
+        log.info("map: " + map);
+
         if (userService.signUp(map) > 0) {
-            return "redirect:/";
+            return "redirect:/user/login";
         } else {
             return "error";
         }
