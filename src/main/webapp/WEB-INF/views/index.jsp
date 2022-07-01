@@ -11,7 +11,7 @@
 <div>Hello, Spring Boot App</div>
 
 
-<div>  <a href="https://hwahong.hs.kr/">
+<div>  <a href="https://hwahong.hs.kr/" target="_blank">
     <img class="img-hwahong" src="/resources/images/hwahong_title.png"/>
 </a></div>
 <div class="row l-covid" style="margin: 10px;">

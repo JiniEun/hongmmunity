@@ -20,13 +20,16 @@ public class UserSignupRequestDto {
 
     private String userStudentId;
 
+    private String userGrade;
+
     @Builder
-    public UserSignupRequestDto(String userEmail, String userPassword, String userName, String userGender, String userStudentId) {
+    public UserSignupRequestDto(String userEmail, String userPassword, String userName, String userGender, String userStudentId, String userGrade) {
         this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.userName = userName;
         this.userGender = userGender;
         this.userStudentId = userStudentId;
+        this.userGrade = userGrade;
     }
 
     public User toEntity() {
@@ -36,6 +39,7 @@ public class UserSignupRequestDto {
                 .userName(userName)
                 .userGender(userGender)
                 .userStudentId(userStudentId)
+                .userGrade(userGrade)
                 .build();
     }
 }

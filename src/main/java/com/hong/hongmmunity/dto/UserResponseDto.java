@@ -7,7 +7,6 @@ import javax.persistence.Column;
 
 @Getter
 public class UserResponseDto {
-    private final Long userId;
 
     private final String userEmail;
 
@@ -24,7 +23,6 @@ public class UserResponseDto {
     private final String userGrade;
 
     public UserResponseDto(User user) {
-        this.userId = user.getUserId();
         this.userEmail = user.getUserEmail();
         this.userPassword = user.getUserPassword();
         this.userName = user.getUserName();

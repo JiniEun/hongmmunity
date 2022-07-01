@@ -2,16 +2,14 @@ package com.hong.hongmmunity.service;
 
 import com.hong.hongmmunity.dto.*;
 import com.hong.hongmmunity.entity.User;
-import com.hong.hongmmunity.exception.BaseException;
-import com.hong.hongmmunity.exception.BaseResponseCode;
 import com.hong.hongmmunity.repository.UserRepository;
+import com.hong.hongmmunity.utility.UserGrade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,7 +18,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public boolean existsByUserEmail(String email) {
-        return userRepository.existsByUserEmail(email).orElseThrow(() -> new BaseException(BaseResponseCode.BAD_REQUEST));
+        return userRepository.existsByUserEmail(email);
     }
 
     public boolean loginCheck(Map<String, String> map) {
@@ -50,14 +48,8 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public UserResponseDto findUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new BaseException(BaseResponseCode.NOT_FOUND));
-        return new UserResponseDto(user);
-    }
-
-    @Transactional(readOnly = true)
     public UserResponseDto findUserByEmail(String email) {
-        User user = userRepository.findByUserEmail(email).orElseThrow(() -> new BaseException(BaseResponseCode.NOT_FOUND));
+        User user = userRepository.findByUserEmail(email);
         return new UserResponseDto(user);
     }
 
@@ -74,14 +66,14 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public Long signUp(Map<String, String> map) {
+    public String signUp(Map<String, String> map) {
 //        map.get("userEmail")
         UserSignupRequestDto userSignupRequestDto = getUserSignupRequestDtoByMap(map);
 
         boolean emailCheck = existsByUserEmail(userSignupRequestDto.getUserEmail());
 
         if(emailCheck){
-            return -1L;
+            return null;
         }
 
         return create(userSignupRequestDto);
@@ -95,45 +87,29 @@ public class UserService {
         String userGender = map.get("userGender");
         String userStudentId = map.get("userStudentId");
 
-        return new UserSignupRequestDto(userEmail, userPassword, userName, userGender, userStudentId);
+
+        return new UserSignupRequestDto(userEmail, userPassword, userName, userGender, userStudentId, UserGrade.MEMBER);
     }
 
 //    public boolean duplicatedEmail(String userEmail){
 //        return false;
 //    }
 
-    private Long create(UserSignupRequestDto userSignupRequestDto) {
-
-        boolean exitsCheck = userRepository.existsByUserEmail(userSignupRequestDto.getUserEmail()).orElseThrow(() -> new BaseException(BaseResponseCode.BAD_REQUEST));
-
-        if (exitsCheck) {
-            throw new BaseException(BaseResponseCode.DUPLICATE_EMAIL);
-        }
-        Long id;
-        try {
-            id = userRepository.save(userSignupRequestDto.toEntity()).getUserId();
-        } catch (Exception e) {
-            throw new BaseException(BaseResponseCode.FAILED_TO_SAVE_USER);
-        }
-
-        return id;
+    private String create(UserSignupRequestDto userSignupRequestDto) {
+        return userRepository.save(userSignupRequestDto.toEntity()).getUserEmail();
     }
 
-    public Optional<User> update(UserUpdateRequestDto userUpdateRequestDto) throws BaseException {
-        Optional<User> user = userRepository.findById(userUpdateRequestDto.getUserId());
-        try {
-            user.ifPresent(selectUser -> {
-                selectUser.setUserPhoneNumber(userUpdateRequestDto.getUserPhoneNumber());
-                userRepository.save(selectUser);
-            });
-        } catch (Exception e) {
-            throw new BaseException(BaseResponseCode.METHOD_NOT_ALLOWED);
-        }
-        return user;
+    public UserResponseDto update(UserUpdateRequestDto userUpdateRequestDto) {
+        User user = userRepository.findByUserEmail(userUpdateRequestDto.getUserEmail());
+
+        user.setUserPhoneNumber(userUpdateRequestDto.getUserPhoneNumber());
+        userRepository.save(user);
+
+        return new UserResponseDto(user);
     }
 
-    public Long delete(Long id) {
-        userRepository.deleteById(id);
-        return id;
+    public String delete(String userEmail) {
+        userRepository.deleteUserByUserEmail(userEmail);
+        return userEmail;
     }
 }

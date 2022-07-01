@@ -64,10 +64,11 @@ public class UserController {
         log.info("map: " + map);
 
         boolean userCheck = userService.loginCheck(map);
+        log.info("userCheck: "+userCheck);
 
         if (!userCheck) {
             model.addAttribute("msg", "아이디 또는 비밀번호를 잘못 입력 했거나 <br>회원이 아닙니다. 회원가입 하세요");
-            return "/user/errorMsg.";
+            return "/user/errorMsg";
         }
 
         UserResponseDto userResponseDto = userService.findUserByMap(map);
@@ -114,7 +115,9 @@ public class UserController {
         log.info("POST : create");
         log.info("map: " + map);
 
-        if (userService.signUp(map) != -1L) {
+        String userEmailCheck = userService.signUp(map);
+
+        if (userEmailCheck != null && userEmailCheck != "") {
             return "redirect:/user/login";
         } else {
             return "error";

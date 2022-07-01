@@ -42,7 +42,7 @@ public class User extends BaseTimeEntity {
     // admin -> UserGrade.ADMIN
 
     @Builder
-    public User(Long userId, String userEmail, String userPassword, String userName, String userGender, String userStudentId, String userPhoneNumber) {
+    public User(Long userId, String userEmail, String userPassword, String userName, String userGender, String userStudentId, String userPhoneNumber, String userGrade) {
         this.userId = userId;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
@@ -50,15 +50,7 @@ public class User extends BaseTimeEntity {
         this.userGender = userGender;
         this.userStudentId = userStudentId;
         this.userPhoneNumber = userPhoneNumber;
-    }
-
-    @Builder
-    public User(String userEmail, String userPassword, String userName, String userGender, String userStudentId) {
-        this.userEmail = userEmail;
-        this.userPassword = userPassword;
-        this.userName = userName;
-        this.userGender = userGender;
-        this.userStudentId = userStudentId;
+        this.userGrade = userGrade;
     }
 
     public void setUserPhoneNumber(String userPhoneNumber){

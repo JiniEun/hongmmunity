@@ -9,12 +9,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class UserUpdateRequestDto {
-    private Long userId;
+    private String userEmail;
     private String userPhoneNumber;
 
     @Builder
-    public UserUpdateRequestDto(Long userId, String userPhoneNumber) {
-        this.userId = userId;
+    public UserUpdateRequestDto(String userEmail, String userPhoneNumber) {
+        this.userEmail = userEmail;
         this.userPhoneNumber = userPhoneNumber;
     }
 }

@@ -11,8 +11,8 @@
     <!-- jquery ajax에 필요한 부분 start -->
     <script type="text/javascript"
             src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script type="text/javascript"
-            src="<%=request.getContextPath()%>/js/ajaxerror.js"></script>
+<%--    <script type="text/javascript"--%>
+<%--            src="<%=request.getContextPath()%>/js/ajaxerror.js"></script>--%>
     <!--jquery ajax에 필요한 부분 end  -->
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
