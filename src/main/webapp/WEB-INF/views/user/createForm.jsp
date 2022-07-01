@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="/resources/css/user_createForm.css">
 </head>
 <body>
-<div class="container-md">
+<div class="container-md py-5">
     <section class="vh-80 gradient-custom">
         <form action="${root}/user/signup" method="post" name="signupfrm" id="signupfrm">
-            <div class="container py-3 h-100">
+            <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100 card-width">
                     <div class="col-1 col-md-8 col-lg-6 col-xl-5">
                         <div class="card bg-secondary text-white" style="border-radius: 1rem;">
@@ -28,6 +28,7 @@
                                         <input type="email" id="userEmail" name="userEmail"
                                                class="form-control form-control-lg" placeholder="example@naver.com"
                                                required="required" value=''/>
+                                        <div id="emailcheck"></div>
                                     </div>
 
                                     <div class="form-outline form-white mb-4">
@@ -96,6 +97,16 @@
         }
 
         document.getElementById('signupfrm').submit();
+    });
+
+    $("#userEmail").change(function() {
+        var url = "emailcheck";
+        url += "?userEmail="+$("#userEmail").val();
+
+        $.get(url, function(data, textStatus) {
+            $("#emailcheck").text(data.msg);
+
+        })
     });
 
 </script>

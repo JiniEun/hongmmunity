@@ -9,15 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -69,7 +67,7 @@ public class UserController {
 
         if (!userCheck) {
             model.addAttribute("msg", "아이디 또는 비밀번호를 잘못 입력 했거나 <br>회원이 아닙니다. 회원가입 하세요");
-            return "/user/errorMsg";
+            return "/user/errorMsg.";
         }
 
         UserResponseDto userResponseDto = userService.findUserByMap(map);
@@ -116,11 +114,32 @@ public class UserController {
         log.info("POST : create");
         log.info("map: " + map);
 
-        if (userService.signUp(map) > 0) {
+        if (userService.signUp(map) != -1L) {
             return "redirect:/user/login";
         } else {
             return "error";
         }
+    }
+
+    @GetMapping(value = "/emailcheck", produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public Map<String, String> emailCheck(String userEmail) {
+
+        log.info("emailCheck");
+        boolean emailCheck = userService.existsByUserEmail(userEmail);
+
+        Map<String, String> map = new HashMap<>();
+        if (emailCheck) {
+            map.put("msg", userEmail + "는 중복되어서 사용할 수 없습니다.");
+
+        } else {
+            map.put("msg", userEmail + "는 중복아님, 사용가능 합니다.");
+        }
+
+        log.info(map.get("msg"));
+
+        return map;
+
     }
 
     @GetMapping("/logout")

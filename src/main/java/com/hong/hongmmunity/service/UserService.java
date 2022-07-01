@@ -42,7 +42,7 @@ public class UserService {
         return new UserLoginRequestDto(userEmail, userPassword);
     }
 
-    public String getUserGrade(Map<String, String> map){
+    public String getUserGrade(Map<String, String> map) {
         String userEmail = map.get("userEmail");
         UserGradeResponseDto userGradeResponseDto = new UserGradeResponseDto(findUserByEmail(userEmail).getUserGrade());
 
@@ -74,12 +74,33 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public Long signUp(Map<String, String> map){
+    public Long signUp(Map<String, String> map) {
 //        map.get("userEmail")
+        UserSignupRequestDto userSignupRequestDto = getUserSignupRequestDtoByMap(map);
 
-        return 1L;
+        boolean emailCheck = existsByUserEmail(userSignupRequestDto.getUserEmail());
+
+        if(emailCheck){
+            return -1L;
+        }
+
+        return create(userSignupRequestDto);
 
     }
+
+    private UserSignupRequestDto getUserSignupRequestDtoByMap(Map<String, String> map) {
+        String userEmail = map.get("userEmail");
+        String userPassword = map.get("userPassword");
+        String userName = map.get("userName");
+        String userGender = map.get("userGender");
+        String userStudentId = map.get("userStudentId");
+
+        return new UserSignupRequestDto(userEmail, userPassword, userName, userGender, userStudentId);
+    }
+
+//    public boolean duplicatedEmail(String userEmail){
+//        return false;
+//    }
 
     private Long create(UserSignupRequestDto userSignupRequestDto) {
 

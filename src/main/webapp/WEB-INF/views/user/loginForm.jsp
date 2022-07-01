@@ -9,16 +9,16 @@
     <link rel="stylesheet" href="/resources/css/user_loginForm.css">
 </head>
 <body>
-<div class="container-md">
-    <section class="vh-100 gradient-custom">
+<div class="container-md py-5">
+    <section class="vh-80 gradient-custom">
         <form action="${root}/user/login" method="post">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
-                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="col-1 col-md-8 col-lg-6 col-xl-5">
                         <div class="card bg-secondary text-white" style="border-radius: 1rem;">
                             <div class="card-body p-5 text-center">
 
-                                <div class="mb-md-5 mt-md-4 pb-5">
+                                <div class="mb-md-1 mt-md-4 pb-4">
 
                                     <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
                                     <p class="text-white-50 mb-5">이메일과 비밀번호를 입력하세요!</p>
