@@ -1,8 +1,6 @@
 package com.hong.hongmmunity.controller;
 
-import com.hong.hongmmunity.dto.UserLoginRequestDto;
 import com.hong.hongmmunity.dto.UserResponseDto;
-import com.hong.hongmmunity.dto.UserSignupRequestDto;
 import com.hong.hongmmunity.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -64,7 +62,7 @@ public class UserController {
         log.info("map: " + map);
 
         boolean userCheck = userService.loginCheck(map);
-        log.info("userCheck: "+userCheck);
+        log.info("userCheck: " + userCheck);
 
         if (!userCheck) {
             model.addAttribute("msg", "아이디 또는 비밀번호를 잘못 입력 했거나 <br>회원이 아닙니다. 회원가입 하세요");
@@ -143,6 +141,12 @@ public class UserController {
 
         return map;
 
+    }
+
+    @GetMapping("/privacy")
+    public String privacy() {
+
+        return "/user/privacy";
     }
 
     @GetMapping("/logout")

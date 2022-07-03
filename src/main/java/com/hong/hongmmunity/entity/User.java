@@ -1,6 +1,5 @@
 package com.hong.hongmmunity.entity;
 
-import com.hong.hongmmunity.utility.UserGrade;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
