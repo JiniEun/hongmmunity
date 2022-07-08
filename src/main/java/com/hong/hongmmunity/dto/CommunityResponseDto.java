@@ -3,10 +3,12 @@ package com.hong.hongmmunity.dto;
 import com.hong.hongmmunity.entity.Community;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
 public class CommunityResponseDto {
 
-    private int communityId;
+    private Long communityId;
 
     private String title;
 
@@ -16,7 +18,11 @@ public class CommunityResponseDto {
 
     private String userEmail;
 
+    private String userName;
+
     private int viewCnt;
+
+    private LocalDateTime modifiedDate;
 
     public CommunityResponseDto(Community community) {
         this.communityId = community.getCommunityId();
@@ -24,6 +30,8 @@ public class CommunityResponseDto {
         this.content = community.getContent();
         this.category = community.getCategory();
         this.userEmail = community.getUser().getUserEmail();
+        this.userName = community.getUser().getUserName();
         this.viewCnt = community.getViewCnt();
+        this.modifiedDate = community.getModifiedDate();
     }
 }

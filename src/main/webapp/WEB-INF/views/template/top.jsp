@@ -3,12 +3,12 @@
 <c:set var="root" value="${pageContext.request.contextPath }"/>
 <%--<c:choose>--%>
 <%--    <c:when--%>
-<%--            test="${not empty sessionScope.ID && sessionScope.grade == 'A'}">--%>
+<%--            test="${not empty sessionScope.userName && sessionScope.grade == 'A'}">--%>
 <%--        <c:set var="str">관리자로 로그인 하셨습니다. ${sessionScope.regionName} 지역 접속 </c:set>--%>
 <%--    </c:when>--%>
 <%--    <c:when--%>
-<%--            test="${not empty sessionScope.ID && sessionScope.grade != 'A'}">--%>
-<%--        <c:set var='str'>안녕하세요  ${sessionScope.ID } 님! ${sessionScope.regionName} 지역 접속</c:set>--%>
+<%--            test="${not empty sessionScope.userName && sessionScope.grade != 'A'}">--%>
+<%--        <c:set var='str'>안녕하세요  ${sessionScope.userName } 님! ${sessionScope.regionName} 지역 접속</c:set>--%>
 <%--    </c:when>--%>
 <%--    <c:otherwise>--%>
 <%--        <c:set var="str">안녕하세요 방문자님! ${sessionScope.regionName} 지역 접속 </c:set>--%>
@@ -30,25 +30,29 @@
 </head>
 <body>
 <!-- 상단 메뉴 -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Hongmmunity</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/">Hongmmunity</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Community</a>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/community/list">Community</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
                         Dropdown
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#">Action</a></li>
                         <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
@@ -58,14 +62,51 @@
 
             </ul>
             <form class="d-flex">
-                <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control me-4" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-secondary" type="submit">Search</button>
             </form>
-            <div class="d-flex ms-3">
-                <button class="btn btn-outline-secondary" type="button" onclick="location.href='/user/login'">Login</button>
-            </div>
-            <div class="d-flex ms-3">
-                <button class="btn btn-link link-secondary" type="button" onclick="location.href='/user/signup'">SignUp</button>
+            <%--            <div class="d-flex ms-3">--%>
+            <%--                <button class="btn btn-outline-secondary" type="button" onclick="location.href='${root}/user/login'">Login</button>--%>
+            <%--            </div>--%>
+            <%--            <div class="d-flex ms-3">--%>
+            <%--                <button class="btn btn-link link-secondary" type="button" onclick="location.href='${root}/user/signup'">SignUp</button>--%>
+            <%--            </div>--%>
+            <div class="float-right">
+                <input type="hidden" value="<c:out value='${sessionScope.userName}'/>"
+                       id="session_id"/>
+                <c:choose>
+                    <c:when test="${empty sessionScope.userName }">
+                        <div class="d-flex ms-3">
+                            <button class="btn btn-outline-secondary" type="button"
+                                    onclick="location.href='${root}/user/login'">로그인
+                            </button>
+                            <button class="btn btn-link link-secondary" type="button"
+                                    onclick="location.href='${root}/user/signup'">회원가입
+                            </button>
+                        </div>
+                    </c:when>
+                    <c:when
+                            test="${not empty sessionScope.userName && sessionScope.grade == 'A'}">
+                        <div class="d-flex ms-3">
+                            <button class="btn btn-link link-secondary" type="button"
+                                    onclick="location.href='${root}/'">마이 페이지
+                            </button>
+                            <button class="btn btn-outline-secondary" type="button"
+                                    onclick="location.href='${root}/user/logout'">로그아웃
+                            </button>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="d-flex ms-3">
+                            <button class="btn btn-link link-secondary" type="button"
+                                    onclick="location.href='${root}/'">마이 페이지
+                            </button>
+                            <button class="btn btn-outline-secondary" type="button"
+                                    onclick="location.href='${root}/user/logout'">로그아웃
+                            </button>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>

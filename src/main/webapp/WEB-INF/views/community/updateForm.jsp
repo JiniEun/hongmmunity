@@ -8,17 +8,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container-fluid">
+	<div class="container my-5 py-4 mx-5">
 		<h3 class="col-sm-offset-2 col-sm-10">community 수정</h3>
 		<br>
 		<form class="form-horizontal" action="/community/update" method="post">
-			<input type="hidden" name="cid" id="cid" class="form-control"
-						value="${dto.cid}">
+			<input type="hidden" name="userEmail" id="userEmail" class="form-control" value="${dto.userEmail}">
+			<input type="hidden" name="communityId" id="communityId" class="form-control" value="${dto.communityId}">
 			 <div class="form-group">
 	            <label class="control-label col-sm-2" for="category">카테고리</label>
 	            <div class="col-sm-6">
 	              <select class="form-control" name="category" id="category">
-	                <option value="동네">동네이야기</option>
+	                <option value="수업">수업</option>
+	                <option value="진로">진로</option>
 	                <option value="분실물">분실물</option>
 	              </select>
 	            </div>
@@ -29,13 +30,12 @@
 					<input type="text" name="title" id="title" class="form-control"
 						value="${dto.title}">
 				</div>
-
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="nickname">작성자</label>
 				<div class="col-sm-2">
 					<input type="text" name="nickname" id="nickname" class="form-control"
-						value="${dto.nickname}">
+						value="${dto.userName}">
 				</div>
 			</div>
 			<div class="form-group">
@@ -45,12 +45,10 @@
 						class="form-control">${dto.content}</textarea>
 				</div>
 			</div>
-
-			
-			<div class="form-group">
+			<div class="form-group mt-3">
 				<div class="col-sm-offset-2 col-sm-5">
-					<button class="btn btn-color">수정</button>
-					<button type="button" class="btn btn-color" onclick="history.back()">취소</button>
+					<button class="btn btn-outline-dark">수정</button>
+					<button type="button" class="btn btn-outline-dark" onclick="history.back()">취소</button>
 				</div>
 			</div>
 		</form>

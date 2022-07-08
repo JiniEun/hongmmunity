@@ -72,6 +72,7 @@ public class UserController {
         UserResponseDto userResponseDto = userService.findUserByMap(map);
         String grade = userService.getUserGrade(map);
 
+        session.setAttribute("userName", userResponseDto.getUserName());
         session.setAttribute("userEmail", userResponseDto.getUserEmail());
         session.setAttribute("grade", grade);
 

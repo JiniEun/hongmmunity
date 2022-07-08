@@ -48,6 +48,11 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
+    public User getUserByEmail(String email) {
+        return  userRepository.findByUserEmail(email);
+    }
+
+    @Transactional(readOnly = true)
     public UserResponseDto findUserByEmail(String email) {
         User user = userRepository.findByUserEmail(email);
         return new UserResponseDto(user);
