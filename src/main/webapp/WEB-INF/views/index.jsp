@@ -52,7 +52,7 @@
             <div class="col space">
                 <div class="row" style="margin: 10px;">
                     <div class="d-flex">
-                        <div class="h4 mb-0 mr-2">오늘 급식</div>
+                        <div class="h4 mb-0 mr-2" style="min-width: 100px;">오늘 급식</div>
                     </div>
                 </div>
                 <div class="row l-covid" style="margin: 10px;">
@@ -99,7 +99,7 @@
                 <div class="col space">
                     <div class="row" style="margin: 10px;">
                         <div class="d-flex">
-                            <div class="h4 mb-0 mr-2">내일 급식</div>
+                            <div class="h4 mb-0 mr-2" style="min-width: 100px;">내일 급식</div>
                         </div>
                     </div>
                     <div class="row l-covid" style="margin: 10px;">
