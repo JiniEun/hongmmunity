@@ -8,12 +8,12 @@
     <%--    <link rel="stylesheet" href="/webapp/resources/css/bottom.css">--%>
 </head>
 <style type="text/css">
-    footer {
+    /*footer {
         min-height: 100px;
-    }
+    }*/
 </style>
 <body>
-<footer class="container-fluid navbar-fixed-bottom body-bottom-color py-3"
+<footer class="container-fluid navbar-fixed-bottom body-bottom-color py-3 mt-5"
         style="text-align: center;">
     <!--container-fluid navbar-fixed-bottom">  sticky-footer-->
     <hr style="margin-top: 0px;" class=""/>
